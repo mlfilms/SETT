@@ -1,0 +1,42 @@
+meta:
+  runSimulation: yes
+  extractSmartNoise: no
+  enhanceImages: yes
+  trainModel: yes
+  runModel: yes
+
+
+
+paths:
+  simRunner: simulations/randomDefects/runSim.py
+  simFunc: runSim #this is the method that will be called on the simRunner file
+  fileConvert: ImageAnnotation
+  noiseFiles: smartNoise/noiseFiles
+  simImagesPath: simulations/randomDefects/accumulated #path to a folder containing simulation images
+  artifactPath: artifacts #path to the folder containing addArtifacts.py. For enhancing simulated training images.
+simulation:
+  images: 10
+  xDim: 300
+  yDim: 300
+  decrossMax: 65
+  decrossMin: 45
+artifacts: #options for changing how simulation images are enhanced
+  imgMeanMax: 0.7
+  imgMeanMin: 0.3
+  imgStdMax: 24
+  imgStdMin: 1
+  gaussianMin: 0 #in units of sigma
+  gaussianMax: 1.5
+  smartNoise: no #yes if you wish to add smart noise extracted from real images
+  smartNoiseMin: 0.3
+  smartNoiseMax: 2.5
+  numCircles: 3 #overlays circles of random brightness on images. 0 to not add in circles
+  addGrid: yes #splits images into four random quadrants, which each have their brightness randomly changed
+  gridRange: 0.5 # range over which a quadrant can be brightened or dimmed
+
+
+
+
+
+standard:
+  stds: 6
