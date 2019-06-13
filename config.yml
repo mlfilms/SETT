@@ -19,13 +19,17 @@ paths:
 
 simulation:
   images: 10
+  numDefects: 20 #number of defects per image
   xDim: 300
   yDim: 300
   decrossMax: 65
   decrossMin: 45
 
 smartNoise:
-  crop: yes #enables manually selecting a crop box only extract noise from a portion of the sample images.
+  crop: yes #enables image cropping to only use noise from a portion of an image
+  cropManual: no #if yes, will allow you to manually select a crop box
+  cropX: [200,600] #sets the x crop limits if cropManual is no
+  cropY: [200,600] #sets the x crop limits if cropManual is no
   standardize: yes #standardizes the noise intensity. Recommended, as the noise files are very dim otherwise.
 
 artifacts: #options for changing how simulation images are enhanced
@@ -35,7 +39,7 @@ artifacts: #options for changing how simulation images are enhanced
   imgStdMin: 1
   gaussianMin: 0 #in units of sigma
   gaussianMax: 1.5
-  smartNoise: no #yes if you wish to add smart noise extracted from real images
+  smartNoise: yes #yes if you wish to add smart noise extracted from real images
   smartNoiseMin: 0.3
   smartNoiseMax: 2.5
   numCircles: 3 #overlays circles of random brightness on images. 0 to not add in circles

@@ -7,6 +7,8 @@ import sys
 import imp
 
 def executeFile(filePath,functionName,cfg):
+    #this function will execute a script, using the folder
+    # the script is located in as the working directory
 
     path, exFile = os.path.split(filePath)
     mainDir = os.getcwd()
@@ -30,16 +32,19 @@ def executeConfig(configName):
     cfg["temp"]["rootDir"] = mainDir
 
     if cfg['meta']['runSimulation']:
+        print("Running Simulation")
         simString = cfg['paths']['simRunner']
         functionName = cfg['paths']['simFunc']
         executeFile(simString,functionName,cfg)
 
     if cfg['meta']['extractSmartNoise']:
-        path = cfg['paths']['smartNoise']
+        print("Extracting Smart Noise")
+        path = cfg['paths']['noiseExtractor']
         noiseExtraction = imp.load_source('packages', os.path.join(path,'noiseExtractor.py'))
-        noiseExtraction.ExtractNoise(cfg)
+        noiseExtraction.noiseExtractor(cfg)
 
     if cfg['meta']['enhanceImages']:
+        print("Enhancing Simulation Images")
         path = cfg['paths']['artifactPath']
         artifacts = imp.load_source('packages', os.path.join(path,'addArtifacts.py'))
         artifacts.addArtifacts(cfg)

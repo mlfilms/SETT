@@ -10,3 +10,9 @@
 [submodule "smartNoise"]
 	path = smartNoise
 	url = https://github.com/mlfilms/smartNoise.git
+[submodule "mAP"]
+	path = mAP
+	url = https://github.com/mlfilms/mAP.git
+[submodule "darkflow"]
+	path = darkflow
+	url = https://github.com/mlfilms/darkflow.git
