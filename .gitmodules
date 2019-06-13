@@ -1,0 +1,9 @@
+[submodule "artifacts"]
+	path = artifacts
+	url = https://github.com/mlfilms/artifacts.git
+[submodule "simulations"]
+	path = simulations
+	url = https://github.com/mlfilms/simulations.git
+[submodule "ImageAnnotation"]
+	path = ImageAnnotation
+	url = https://github.com/mlfilms/ImageAnnotation.git
