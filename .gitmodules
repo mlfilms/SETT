@@ -7,3 +7,6 @@
 [submodule "ImageAnnotation"]
 	path = ImageAnnotation
 	url = https://github.com/mlfilms/ImageAnnotation.git
+[submodule "smartNoise"]
+	path = smartNoise
+	url = https://github.com/mlfilms/smartNoise.git

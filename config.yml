@@ -1,25 +1,33 @@
-meta:
+
+
+meta: #which modules you would like to run
   runSimulation: yes
-  extractSmartNoise: no
+  extractSmartNoise: yes
   enhanceImages: yes
   trainModel: yes
   runModel: yes
 
-
-
-paths:
+paths: 
   simRunner: simulations/randomDefects/runSim.py
   simFunc: runSim #this is the method that will be called on the simRunner file
   fileConvert: ImageAnnotation
-  noiseFiles: smartNoise/noiseFiles
+  noiseExtractor: smartNoise
+  noiseSamples: smartNoise/noiseSamples #images to extract fourier noise from
+  noiseFiles: smartNoise/noiseSamples/noiseFiles #location where fourier noise files is stored
   simImagesPath: simulations/randomDefects/accumulated #path to a folder containing simulation images
   artifactPath: artifacts #path to the folder containing addArtifacts.py. For enhancing simulated training images.
+
 simulation:
   images: 10
   xDim: 300
   yDim: 300
   decrossMax: 65
   decrossMin: 45
+
+smartNoise:
+  crop: yes #enables manually selecting a crop box only extract noise from a portion of the sample images.
+  standardize: yes #standardizes the noise intensity. Recommended, as the noise files are very dim otherwise.
+
 artifacts: #options for changing how simulation images are enhanced
   imgMeanMax: 0.7
   imgMeanMin: 0.3

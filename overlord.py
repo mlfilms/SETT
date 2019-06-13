@@ -34,6 +34,11 @@ def executeConfig(configName):
         functionName = cfg['paths']['simFunc']
         executeFile(simString,functionName,cfg)
 
+    if cfg['meta']['extractSmartNoise']:
+        path = cfg['paths']['smartNoise']
+        noiseExtraction = imp.load_source('packages', os.path.join(path,'noiseExtractor.py'))
+        noiseExtraction.ExtractNoise(cfg)
+
     if cfg['meta']['enhanceImages']:
         path = cfg['paths']['artifactPath']
         artifacts = imp.load_source('packages', os.path.join(path,'addArtifacts.py'))
