@@ -9,7 +9,7 @@ import imp
 def executeFile(filePath,functionName,cfg):
     #this function will execute a script, using the folder
     # the script is located in as the working directory
-
+    #print(filePath)
     path, exFile = os.path.split(filePath)
     mainDir = os.getcwd()
     fullPath = os.path.join(mainDir,path)
@@ -48,6 +48,18 @@ def executeConfig(configName):
         path = cfg['paths']['artifactPath']
         artifacts = imp.load_source('packages', os.path.join(path,'addArtifacts.py'))
         artifacts.addArtifacts(cfg)
+
+    if cfg['meta']['trainModel']:
+        print("Training Model")
+        trainString = os.path.join(cfg['paths']['darkflow'],'trainFlow.py')
+        functionName = 'trainFlowCFG'
+        executeFile(trainString,functionName,cfg)
+
+    if cfg['meta']['runModel']:
+        print("Running Model")
+        trainString = os.path.join(cfg['paths']['darkflow'],'runFlowPB.py')
+        functionName = 'runFlowCFG'
+        executeFile(trainString,functionName,cfg)
 
         #simString = cfg['paths']['simRunner']
         #functionName = cfg['paths']['simFunc']
