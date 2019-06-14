@@ -66,8 +66,7 @@ darkflow: #make paths absolute or relative to main darkflow folder
   runTrained: no #runs the model that was just trained.
   meta_file: bin/defectG.meta #runs pretrained model if runTrained is no
   pb_file: bin/defectG.pb
-  validation_detection_path: ../simulations/randomDefects/accumulated/outMess/outIMG
-  validation_truth_path: ../simulations/randomDefects/accumulated/out
+
   mAPPath: ../mAp
 
   threshold: 0.3
@@ -80,6 +79,11 @@ darkflow: #make paths absolute or relative to main darkflow folder
   gpu_usage: 1
   labels_file: one_label.txt
   json: True
+
+validation:
+  validation_detection_path: simulations/randomDefects/accumulated/outMess/outIMG
+  validation_truth_path: simulations/randomDefects/accumulated/out
+
 
 imageCorrection:
   imgFolder: simulations/randomDefects/accumulated/outMess
