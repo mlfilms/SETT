@@ -9,3 +9,9 @@ first time
 other times
 
 **git pull** --recurse-**submodules**
+
+
+
+to get requirements
+
+pip install -r requirements.txt
