@@ -25,7 +25,7 @@ paths:
   imageCorrection: smartNoise
 
 simulation:
-  images: 10
+  images: 100
   numDefects: 20 #number of defects per image
   xDim: 300
   yDim: 300
@@ -58,6 +58,9 @@ darkflow: #make paths absolute or relative to main darkflow folder
   training_annotations: ../simulations/randomDefects/accumulated/out
   training_images: ../simulations/randomDefects/accumulated/outMess
   run_directory: ../simulations/randomDefects/accumulated/outMess/corrected
+  genMarkedImages: yes
+  saveAll: no 
+  saveNum: 10 # save all is no, this is the number of images to be saved
   image_ext: jpg
 
   runTrained: no #runs the model that was just trained.
