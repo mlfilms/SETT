@@ -55,6 +55,12 @@ def executeConfig(configName):
         functionName = 'trainFlowCFG'
         executeFile(trainString,functionName,cfg)
 
+    if cfg['meta']['correctImages']:
+        print("Correcting Images")
+        path = cfg['paths']['imageCorrection']
+        artifacts = imp.load_source('packages', os.path.join(path,'correctImages.py'))
+        artifacts.correctImagesCFG(cfg)
+
     if cfg['meta']['runModel']:
         print("Running Model")
         trainString = os.path.join(cfg['paths']['darkflow'],'runFlowPB.py')
