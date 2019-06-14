@@ -2,9 +2,9 @@
 
 meta: #which modules you would like to run
   runName: everything
-  runSimulation: no
-  extractSmartNoise: no
-  enhanceImages: no
+  runSimulation: yes
+  extractSmartNoise: yes
+  enhanceImages: yes
   trainModel: no
   saveModel: yes
   runModel: yes
