@@ -3,7 +3,7 @@
 macro: no #set yes if this config is a list of config files to be run
 
 meta: #which modules you would like to run
-  runName: run1
+  runName: run2
   runSimulation: no
   extractSmartNoise: no
   enhanceImages: no
