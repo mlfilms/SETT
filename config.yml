@@ -27,8 +27,10 @@ paths:
 simulation:
   images: 100
   numDefects: 20 #number of defects per image
-  xDim: 300
-  yDim: 300
+  minDefects: 10
+  maxDefects: 70
+  xDim: 1000
+  yDim: 800
   decrossMax: 65
   decrossMin: 45
 
@@ -64,8 +66,8 @@ darkflow: #make paths absolute or relative to main darkflow folder
   image_ext: jpg
 
   runTrained: no #runs the model that was just trained.
-  meta_file: bin/defectG.meta #runs pretrained model if runTrained is no
-  pb_file: bin/defectG.pb
+  meta_file: bin/defectT.meta #runs pretrained model if runTrained is no
+  pb_file: bin/defectT.pb
 
   mAPPath: ../mAp
 
@@ -76,7 +78,7 @@ darkflow: #make paths absolute or relative to main darkflow folder
   epoch: 75
 
   starting_weights: bin/yolo.weights
-  gpu_usage: 1
+  gpu_usage: 0
   labels_file: one_label.txt
   json: True
 
