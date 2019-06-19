@@ -84,7 +84,7 @@ def executeConfig(configName):
             newResultspath = os.path.join(cfg['temp']['rootDir'],saveDir,'results.txt')
             shutil.copyfile(resultsPath,newResultspath)
 
-
+    os.chdir(cfg['temp']['rootDir'])
         #simString = cfg['paths']['simRunner']
         #functionName = cfg['paths']['simFunc']
         #executeFile(simString,functionName,cfg)
