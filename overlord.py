@@ -28,6 +28,12 @@ def executeConfig(configName):
     with open(configName,'r') as ymlfile:
         cfg = yaml.safe_load(ymlfile)
 
+    saveDir = os.path.join('runData',cfg['meta']['runName'])
+    if cfg['meta']['saveRun']:
+        if os.path.exists(saveDir):
+            shutil.rmtree(saveDir)
+        os.makedirs(saveDir)
+
     cfg["temp"] = {}
     cfg["temp"]["rootDir"] = mainDir
 
@@ -67,6 +73,18 @@ def executeConfig(configName):
         functionName = 'runFlowCFG'
         executeFile(trainString,functionName,cfg)
 
+    if cfg['meta']['validate']:
+        print("Validating")
+        path = cfg['paths']['validation']
+        artifacts = imp.load_source('packages', os.path.join(path,'validate.py'))
+        artifacts.validateCFG(cfg)
+        os.chdir(cfg['temp']['rootDir'])
+        if cfg['meta']['saveRun']:
+            resultsPath = os.path.join(cfg['temp']['rootDir'],cfg['paths']['validation'],'results','results.txt')
+            newResultspath = os.path.join(cfg['temp']['rootDir'],saveDir,'results.txt')
+            shutil.copyfile(resultsPath,newResultspath)
+
+    os.chdir(cfg['temp']['rootDir'])
         #simString = cfg['paths']['simRunner']
         #functionName = cfg['paths']['simFunc']
         #executeFile(simString,functionName,cfg)
@@ -87,13 +105,31 @@ def executeConfig(configName):
 
 
 
-
+def executeJobs(configName):
+    
+    print("Using jobs file: "+configName)
+    with open(configName,'r') as ymlfile:
+        cfg = yaml.safe_load(ymlfile)
+    for config in cfg['jobs']:
+        print("Executing config file: "+config)
+        print("Rootdir: "+ os.getcwd())
+        executeConfig(config)
+        print("Finished: "+config)
 
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument("config",nargs='?',type = str, default='config.yml', help='config file to execute')
-
     args= parser.parse_args()
-    executeConfig(args.config)
+    config = args.config
+
+    with open(config,'r') as ymlfile:
+        cfg = yaml.safe_load(ymlfile)
+
+    if not cfg['macro']:
+        executeConfig(config)
+    elif cfg['macro']:
+        executeJobs(config)
+    else:
+        print("Invalid Config")

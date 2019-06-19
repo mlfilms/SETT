@@ -30,11 +30,9 @@ paths:
 simulation:
   images: 1000
   numDefects: 20 #number of defects per image
-  minDefects: 10
-  maxDefects: 70
-  xDim: 1000
-  yDim: 800
-  decrossMax: 65
+  xDim: 200
+  yDim: 200
+  decrossMax: 55
   decrossMin: 45
 
 smartNoise:
@@ -68,20 +66,20 @@ darkflow: #make paths absolute or relative to main darkflow folder
   saveNum: 10 # save all is no, this is the number of images to be saved
   image_ext: tif
 
-  runTrained: no #runs the model that was just trained.
-  meta_file: bin/defectT.meta #runs pretrained model if runTrained is no
-  pb_file: bin/defectT.pb
+  runTrained: yes #runs the model that was just trained.
+  meta_file: bin/defectG.meta #runs pretrained model if runTrained is no
+  pb_file: bin/defectG.pb
 
   mAPPath: ../mAp
 
-  threshold: 0.3
+  threshold: 0.1
   learning_rate: 1e-5
   model: cfg/yolo_custom2.cfg
-  batch_size: 8
+  batch_size: 7
   epoch: 40
 
   starting_weights: bin/yolo.weights
-  gpu_usage: 0
+  gpu_usage: 1
   labels_file: one_label.txt
   json: True
 
