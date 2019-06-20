@@ -33,6 +33,8 @@ def executeConfig(configName):
         if os.path.exists(saveDir):
             shutil.rmtree(saveDir)
         os.makedirs(saveDir)
+        with open(os.path.join(saveDir,'config.yml'), 'w') as yaml_file:
+            yaml.dump(cfg, yaml_file, default_flow_style=False)
 
     cfg["temp"] = {}
     cfg["temp"]["rootDir"] = mainDir
