@@ -1,7 +1,10 @@
 macro: yes #set yes if this config is a list of config files to be run
 
 jobs: [
-  "config.yml",
-  "config2.yml"
+  "tests/SNDynamic.yml",
+  "tests/SNDynamicBounds.yml",
+  "tests/SNGauss.yml",
+  "tests/fullNoRandD.yml",
+  "tests/fullRandD.yml"
 ]
 

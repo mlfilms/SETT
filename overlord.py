@@ -34,6 +34,8 @@ def executeConfig(configName):
         if os.path.exists(saveDir):
             shutil.rmtree(saveDir)
         os.makedirs(saveDir)
+        with open(os.path.join(saveDir,'config.yml'), 'w') as yaml_file:
+            yaml.dump(cfg, yaml_file, default_flow_style=False)
 
     cfg["temp"] = {}
     cfg["temp"]["rootDir"] = mainDir
@@ -85,7 +87,7 @@ def executeConfig(configName):
             newResultspath = os.path.join(cfg['temp']['rootDir'],saveDir,'results.txt')
             shutil.copyfile(resultsPath,newResultspath)
 
-
+    os.chdir(cfg['temp']['rootDir'])
         #simString = cfg['paths']['simRunner']
         #functionName = cfg['paths']['simFunc']
         #executeFile(simString,functionName,cfg)
