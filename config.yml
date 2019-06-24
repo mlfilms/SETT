@@ -3,12 +3,12 @@
 macro: no #set yes if this config is a list of config files to be run
 
 meta: #which modules you would like to run
-  runName: ranNumFull
-  runSimulation: yes
+  runName: valTest
+  runSimulation: no
   extractSmartNoise: no
-  enhanceImages: yes
-  trainModel: yes
-  saveModel: yes
+  enhanceImages: no
+  trainModel: no
+  saveModel: no
   runModel: yes
   correctImages: yes #corrects images before running model on them
   validate: yes
@@ -62,19 +62,19 @@ artifacts: #options for changing how simulation images are enhanced
 darkflow: #make paths absolute or relative to main darkflow folder
   training_annotations: ../simulations/randomDefects/accumulated/out
   training_images: ../simulations/randomDefects/accumulated/outMess
-  run_directory: ../../imageData/annotations/corrected
+  run_directory: ../../data/collated/annotations/corrected
   genMarkedImages: yes
   saveAll: yes 
   saveNum: 10 # save all is no, this is the number of images to be saved
   image_ext: tif
 
-  runTrained: yes #runs the model that was just trained.
+  runTrained: no #runs the model that was just trained.
   meta_file: bin/defectT.meta #runs pretrained model if runTrained is no
   pb_file: bin/defectT.pb
 
   mAPPath: ../mAp
 
-  threshold: 0.3
+  threshold: 0
   learning_rate: 1e-5
   model: cfg/yolo_custom2.cfg
   batch_size: 8
@@ -86,12 +86,12 @@ darkflow: #make paths absolute or relative to main darkflow folder
   json: True
 
 validation:
-  validation_detection_path: ../imageData/annotations/corrected/outIMG
-  validation_truth_path: ../imageData/annotations/csv/out
+  validation_detection_path: ../data/collated/annotations/corrected/outIMG
+  validation_truth_path: ../data/collated/annotations/csv/out
 
 
 imageCorrection:
-  imgFolder: ../imageData/annotations
+  imgFolder: ../data/collated/annotations
   imgExt: tif
   selectBox: no #select a box to base correction on
   autoBox: yes # if select box is no, use the below coordinates as a crop box

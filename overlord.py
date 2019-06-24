@@ -124,15 +124,25 @@ def executeJobs(configName):
 
 def reeval(cfg):
     filePattern = "runData/*/*.meta"
-
+    mainDir = os.getcwd()
     for filename in glob.glob(filePattern):
         metaName = os.path.basename(filename)
         dirName = os.path.dirname(filename)
         modelName,ext = os.path.splitext(metaName)
-        PBPath = dirName+ modelName+'.pb'
+        PBPath = os.path.join(dirName, modelName+'.pb')
         cfg["temp"] = {}
         cfg["temp"]["rootDir"] = mainDir
+
+        cfg['darkflow']['meta_file'] = os.path.join('..',filename)
+        cfg['darkflow']['pb_file'] = os.path.join('..',PBPath)
+        print(modelName)
+        print("Running Model")
+        trainString = os.path.join(cfg['paths']['darkflow'],'runFlowPB.py')
+        functionName = 'runFlowCFG'
+        executeFile(trainString,functionName,cfg)
+
         
+        cfg['meta']['runName'] = modelName
         saveDir = os.path.join('runData',cfg['meta']['runName'])
         print("Validating")
         path = cfg['paths']['validation']
@@ -142,7 +152,12 @@ def reeval(cfg):
         if cfg['meta']['saveRun']:
             resultsPath = os.path.join(cfg['temp']['rootDir'],cfg['paths']['validation'],'results','results.txt')
             newResultspath = os.path.join(cfg['temp']['rootDir'],saveDir,'results.txt')
+            
+            mapPath = os.path.join(cfg['temp']['rootDir'],cfg['paths']['validation'],'results','classes','class.png')
+            mapResultspath = os.path.join(cfg['temp']['rootDir'],saveDir,'class.png')
+
             shutil.copyfile(resultsPath,newResultspath)
+            shutil.copyfile(mapPath,mapResultspath)
         print(PBPath)
 
 
