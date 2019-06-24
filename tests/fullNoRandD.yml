@@ -3,7 +3,7 @@
 macro: no #set yes if this config is a list of config files to be run
 
 meta: #which modules you would like to run
-  runName: justSmartNoise
+  runName: NoRanNumFull
   runSimulation: yes
   extractSmartNoise: no
   enhanceImages: yes
@@ -30,10 +30,12 @@ paths:
 simulation:
   images: 1000
   numDefects: 20 #number of defects per image
-  xDim: 300
-  yDim: 300
-  decrossMax: 65
-  decrossMin: 35
+  minDefects: 20
+  maxDefects: 20
+  xDim: 250
+  yDim: 200
+  decrossMax: 50
+  decrossMin: 50
 
 smartNoise:
   crop: yes #enables image cropping to only use noise from a portion of an image
@@ -43,18 +45,18 @@ smartNoise:
   standardize: yes #standardizes the noise intensity. Recommended, as the noise files are very dim otherwise.
 
 artifacts: #options for changing how simulation images are enhanced
-  imgMeanMax: 0.5
-  imgMeanMin: 0.5
-  imgStdMax: 6
-  imgStdMin: 6
+  imgMeanMax: 0.7
+  imgMeanMin: 0.3
+  imgStdMax: 24
+  imgStdMin: 1
   gaussianMin: 0 #in units of sigma
-  gaussianMax: 0
+  gaussianMax: 1.5
   smartNoise: yes #yes if you wish to add smart noise extracted from real images
   smartNoiseMin: 0.3
   smartNoiseMax: 2.5
-  numCircles: 0 #overlays circles of random brightness on images. 0 to not add in circles
-  addGrid: no #splits images into four random quadrants, which each have their brightness randomly changed
-  gridRange: 0.3 # range over which a quadrant can be brightened or dimmed
+  numCircles: 3 #overlays circles of random brightness on images. 0 to not add in circles
+  addGrid: yes #splits images into four random quadrants, which each have their brightness randomly changed
+  gridRange: 0.5 # range over which a quadrant can be brightened or dimmed
 
 
 darkflow: #make paths absolute or relative to main darkflow folder
@@ -67,15 +69,15 @@ darkflow: #make paths absolute or relative to main darkflow folder
   image_ext: tif
 
   runTrained: yes #runs the model that was just trained.
-  meta_file: bin/defectG.meta #runs pretrained model if runTrained is no
-  pb_file: bin/defectG.pb
+  meta_file: bin/defectT.meta #runs pretrained model if runTrained is no
+  pb_file: bin/defectT.pb
 
   mAPPath: ../mAp
 
   threshold: 0.1
   learning_rate: 1e-5
   model: cfg/yolo_custom2.cfg
-  batch_size: 7
+  batch_size: 8
   epoch: 40
 
   starting_weights: bin/yolo.weights
@@ -86,6 +88,7 @@ darkflow: #make paths absolute or relative to main darkflow folder
 validation:
   validation_detection_path: ../imageData/annotations/corrected/outIMG
   validation_truth_path: ../imageData/annotations/csv/out
+
 
 imageCorrection:
   imgFolder: ../imageData/annotations

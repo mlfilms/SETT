@@ -5,6 +5,7 @@ import os
 import shutil
 import sys
 import imp
+import glob
 
 def executeFile(filePath,functionName,cfg):
     #this function will execute a script, using the folder
@@ -33,6 +34,8 @@ def executeConfig(configName):
         if os.path.exists(saveDir):
             shutil.rmtree(saveDir)
         os.makedirs(saveDir)
+        with open(os.path.join(saveDir,'config.yml'), 'w') as yaml_file:
+            yaml.dump(cfg, yaml_file, default_flow_style=False)
 
     cfg["temp"] = {}
     cfg["temp"]["rootDir"] = mainDir
@@ -117,15 +120,46 @@ def executeJobs(configName):
         print("Finished: "+config)
 
 
+
+
+def reeval(cfg):
+    filePattern = "runData/*/*.meta"
+
+    for filename in glob.glob(filePattern):
+        metaName = os.path.basename(filename)
+        dirName = os.path.dirname(filename)
+        modelName,ext = os.path.splitext(metaName)
+        PBPath = dirName+ modelName+'.pb'
+        cfg["temp"] = {}
+        cfg["temp"]["rootDir"] = mainDir
+        
+        saveDir = os.path.join('runData',cfg['meta']['runName'])
+        print("Validating")
+        path = cfg['paths']['validation']
+        artifacts = imp.load_source('packages', os.path.join(path,'validate.py'))
+        artifacts.validateCFG(cfg)
+        os.chdir(cfg['temp']['rootDir'])
+        if cfg['meta']['saveRun']:
+            resultsPath = os.path.join(cfg['temp']['rootDir'],cfg['paths']['validation'],'results','results.txt')
+            newResultspath = os.path.join(cfg['temp']['rootDir'],saveDir,'results.txt')
+            shutil.copyfile(resultsPath,newResultspath)
+        print(PBPath)
+
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument("config",nargs='?',type = str, default='config.yml', help='config file to execute')
+    parser.add_argument("--reeval", dest='reeval', default='False', action='store_const', const=True, help='config file to execute')
     args= parser.parse_args()
     config = args.config
 
+
     with open(config,'r') as ymlfile:
         cfg = yaml.safe_load(ymlfile)
+    if(args.reeval ==True):
+        print('Reeval!!!')
+        reeval(cfg)
 
     if not cfg['macro']:
         executeConfig(config)

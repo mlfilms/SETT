@@ -60,19 +60,19 @@ artifacts: #options for changing how simulation images are enhanced
 darkflow: #make paths absolute or relative to main darkflow folder
   training_annotations: ../simulations/randomDefects/accumulated/out
   training_images: ../simulations/randomDefects/accumulated/outMess
-  run_directory: ../simulations/randomDefects/accumulated/outMess/corrected
+  run_directory: ../imageData/annotations/corrected
   genMarkedImages: yes
-  saveAll: no 
+  saveAll: yes 
   saveNum: 10 # save all is no, this is the number of images to be saved
-  image_ext: jpg
+  image_ext: tif
 
   runTrained: no #runs the model that was just trained.
-  meta_file: bin/defectG.meta #runs pretrained model if runTrained is no
-  pb_file: bin/defectG.pb
+  meta_file: bin/ranNumFull.meta #runs pretrained model if runTrained is no
+  pb_file: bin/ranNumFull.pb
 
   mAPPath: ../mAp
 
-  threshold: 0.3
+  threshold: 0
   learning_rate: 1e-5
   model: cfg/yolo_custom2.cfg
   batch_size: 8
@@ -84,14 +84,14 @@ darkflow: #make paths absolute or relative to main darkflow folder
   json: True
 
 validation:
-  validation_detection_path: simulations/randomDefects/accumulated/outMess/corrected/outIMG
-  validation_truth_path: simulations/randomDefects/accumulated/out
+  validation_detection_path: imageData/rmap/rmap/corrected/outIMG
+  validation_truth_path: imageData/rmap/rmap/CSV/out
 
 
 imageCorrection:
-  imgFolder: simulations/randomDefects/accumulated/outMess
-  imgExt: jpg
-  selectBox: yes #select a box to base correction on
+  imgFolder: imageData/annotations
+  imgExt: tif
+  selectBox: no #select a box to base correction on
 
 
 standard:

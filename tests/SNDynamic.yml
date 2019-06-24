@@ -3,7 +3,7 @@
 macro: no #set yes if this config is a list of config files to be run
 
 meta: #which modules you would like to run
-  runName: full
+  runName: SNDynamic
   runSimulation: yes
   extractSmartNoise: no
   enhanceImages: yes
@@ -30,10 +30,12 @@ paths:
 simulation:
   images: 1000
   numDefects: 20 #number of defects per image
-  xDim: 200
+  minDefects: 10
+  maxDefects: 50
+  xDim: 250
   yDim: 200
-  decrossMax: 55
-  decrossMin: 45
+  decrossMax: 50
+  decrossMin: 50
 
 smartNoise:
   crop: yes #enables image cropping to only use noise from a portion of an image
@@ -48,12 +50,12 @@ artifacts: #options for changing how simulation images are enhanced
   imgStdMax: 24
   imgStdMin: 1
   gaussianMin: 0 #in units of sigma
-  gaussianMax: 1.5
+  gaussianMax: 0
   smartNoise: yes #yes if you wish to add smart noise extracted from real images
   smartNoiseMin: 0.3
   smartNoiseMax: 2.5
-  numCircles: 3 #overlays circles of random brightness on images. 0 to not add in circles
-  addGrid: yes #splits images into four random quadrants, which each have their brightness randomly changed
+  numCircles: 0 #overlays circles of random brightness on images. 0 to not add in circles
+  addGrid: no #splits images into four random quadrants, which each have their brightness randomly changed
   gridRange: 0.5 # range over which a quadrant can be brightened or dimmed
 
 
@@ -67,15 +69,15 @@ darkflow: #make paths absolute or relative to main darkflow folder
   image_ext: tif
 
   runTrained: yes #runs the model that was just trained.
-  meta_file: bin/defectG.meta #runs pretrained model if runTrained is no
-  pb_file: bin/defectG.pb
+  meta_file: bin/defectT.meta #runs pretrained model if runTrained is no
+  pb_file: bin/defectT.pb
 
   mAPPath: ../mAp
 
   threshold: 0.1
   learning_rate: 1e-5
   model: cfg/yolo_custom2.cfg
-  batch_size: 7
+  batch_size: 8
   epoch: 40
 
   starting_weights: bin/yolo.weights
