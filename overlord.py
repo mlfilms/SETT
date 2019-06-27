@@ -6,6 +6,8 @@ import shutil
 import sys
 import imp
 import glob
+import numpy as np
+import pandas as pd
 
 def executeFile(filePath,functionName,cfg):
     #this function will execute a script, using the folder
@@ -31,9 +33,9 @@ def executeConfig(configName):
 
     saveDir = os.path.join('runData',cfg['meta']['runName'])
     if cfg['meta']['saveRun']:
-        if os.path.exists(saveDir):
-            shutil.rmtree(saveDir)
-        os.makedirs(saveDir)
+        if not os.path.exists(saveDir):
+            os.makedirs(saveDir)
+        
         with open(os.path.join(saveDir,'config.yml'), 'w') as yaml_file:
             yaml.dump(cfg, yaml_file, default_flow_style=False)
 
@@ -85,7 +87,16 @@ def executeConfig(configName):
         if cfg['meta']['saveRun']:
             resultsPath = os.path.join(cfg['temp']['rootDir'],cfg['paths']['validation'],'results','results.txt')
             newResultspath = os.path.join(cfg['temp']['rootDir'],saveDir,'results.txt')
+
+            measuresPath = os.path.join(cfg['temp']['rootDir'],cfg['paths']['validation'],'results','measures.txt')
+            newMeasurespath = os.path.join(cfg['temp']['rootDir'],saveDir,'measures.txt')
+            
+            mapPath = os.path.join(cfg['temp']['rootDir'],cfg['paths']['validation'],'results','classes','class.png')
+            mapResultspath = os.path.join(cfg['temp']['rootDir'],saveDir,'class.png')
+
+            shutil.copyfile(measuresPath,newMeasurespath)
             shutil.copyfile(resultsPath,newResultspath)
+            shutil.copyfile(mapPath,mapResultspath)
 
     os.chdir(cfg['temp']['rootDir'])
         #simString = cfg['paths']['simRunner']
@@ -125,6 +136,14 @@ def executeJobs(configName):
 def reeval(cfg):
     filePattern = "runData/*/*.meta"
     mainDir = os.getcwd()
+    modelNames = []
+    thresholds = []
+    precisions = []
+    recalls = []
+    mAPs = []
+    f1s = []
+
+
     for filename in glob.glob(filePattern):
         metaName = os.path.basename(filename)
         dirName = os.path.dirname(filename)
@@ -152,13 +171,42 @@ def reeval(cfg):
         if cfg['meta']['saveRun']:
             resultsPath = os.path.join(cfg['temp']['rootDir'],cfg['paths']['validation'],'results','results.txt')
             newResultspath = os.path.join(cfg['temp']['rootDir'],saveDir,'results.txt')
+
+            measuresPath = os.path.join(cfg['temp']['rootDir'],cfg['paths']['validation'],'results','measures.txt')
+            newMeasurespath = os.path.join(cfg['temp']['rootDir'],saveDir,'measures.txt')
             
             mapPath = os.path.join(cfg['temp']['rootDir'],cfg['paths']['validation'],'results','classes','class.png')
             mapResultspath = os.path.join(cfg['temp']['rootDir'],saveDir,'class.png')
 
+            shutil.copyfile(measuresPath,newMeasurespath)
             shutil.copyfile(resultsPath,newResultspath)
             shutil.copyfile(mapPath,mapResultspath)
+
+            measures = np.loadtxt(open(newMeasurespath,'rb'), skiprows = 1)
+            modelNames.append(modelName)
+            thresholds.append(measures[0])
+            precisions.append(measures[1])
+            recalls.append(measures[2])
+            f1s.append(measures[3])
+            mAPs.append(measures[4])
+
+
+
         print(PBPath)
+    collatedFolder = os.path.join('runData','Collated')
+    collatedPath = os.path.join(collatedFolder,'measures.txt')
+    collatedPathCSV = os.path.join(collatedFolder,'measures.csv')
+    if os.path.exists(collatedFolder):
+        shutil.rmtree(collatedFolder)
+    os.makedirs(collatedFolder)
+
+
+
+    dataDict = {'name':modelNames, 'threshold': thresholds, 'precision':precisions, 'recall':recalls, 'F1 Score':f1s, 'mAP': mAPs}
+    pandaData = pd.DataFrame(data=dataDict)
+    print(pandaData)
+    pandaData.to_csv('modelData.csv',index=False)
+
 
 
 if __name__ == '__main__':
