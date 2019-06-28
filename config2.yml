@@ -3,16 +3,16 @@
 macro: no #set yes if this config is a list of config files to be run
 
 meta: #which modules you would like to run
-  runName: run2
-  runSimulation: no
+  runName: sample Images
+  runSimulation: yes
   extractSmartNoise: no
-  enhanceImages: no
+  enhanceImages: yes
   trainModel: no
   saveModel: no
   runModel: no
   correctImages: no #corrects images before running model on them
-  validate: yes
-  saveRun: yes #saves the generated model and validation results file.
+  validate: no
+  saveRun: no #saves the generated model and validation results file.
 
 paths: 
   simRunner: simulations/randomDefects/runSim.py
@@ -30,6 +30,8 @@ paths:
 simulation:
   images: 100
   numDefects: 20 #number of defects per image
+  minDefects: 10
+  maxDefects: 50
   xDim: 300
   yDim: 300
   decrossMax: 65
@@ -43,18 +45,18 @@ smartNoise:
   standardize: yes #standardizes the noise intensity. Recommended, as the noise files are very dim otherwise.
 
 artifacts: #options for changing how simulation images are enhanced
-  imgMeanMax: 0.7
-  imgMeanMin: 0.3
-  imgStdMax: 24
-  imgStdMin: 1
+  imgMeanMax: 0.4
+  imgMeanMin: 0.6
+  imgStdMax: 8
+  imgStdMin: 4
   gaussianMin: 0 #in units of sigma
-  gaussianMax: 1.5
+  gaussianMax: 2
   smartNoise: yes #yes if you wish to add smart noise extracted from real images
   smartNoiseMin: 0.3
   smartNoiseMax: 2.5
   numCircles: 3 #overlays circles of random brightness on images. 0 to not add in circles
   addGrid: yes #splits images into four random quadrants, which each have their brightness randomly changed
-  gridRange: 0.5 # range over which a quadrant can be brightened or dimmed
+  gridRange: 0.2 # range over which a quadrant can be brightened or dimmed
 
 
 darkflow: #make paths absolute or relative to main darkflow folder

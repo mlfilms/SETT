@@ -28,17 +28,20 @@ paths:
   validation: mAP #path to mAP folder
 
 simulation:
-  images: 100 
+  images: 100
   numDefects: 20 #number of defects per image
   minDefects: 10
   maxDefects: 50
-  xDim: 250
+  xDim: 150
   yDim: 200
   decrossMax: 50
   decrossMin: 50
   erasePrevious: yes #erases previous run data
   minTimeLim : 40 #simulated images below this time threshold will be discarded
-  numRuns: 3 #number of times to run the LandauGin simulation
+  numRuns: 4 #number of times to run the LandauGin simulation
+  tmin: 2 #minimum and maximum values for the k parameter in LandauGin
+  tmax: 2
+  endT: 1000 #end time
   
 
 smartNoise:
