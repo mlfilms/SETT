@@ -1,0 +1,20 @@
+name,threshold,precision,recall,mAP,,Description
+defectT,0.405472338,0.739814153,0.740343348,0.699693123,,"All artifacts, ran for a long time"
+hDecross,0.617573857,0.670140281,0.597997139,0.619683427,,Increased decross range
+HDynamic,0.48493889,0.61349454,0.562589413,0.578650883,,Increased dynamic variance
+HDynamicBounds,0.53194803,0.658034764,0.663447783,0.642724298,,increased dynamic boundaries from grid and islands
+hGauss,0.438298464,0.651014275,0.61981402,0.626199193,,Increased Gaussian blurring range
+hSN,0.482837826,0.616456536,0.664520744,0.61735528,,Increased smartNoise range
+justDynamic,0.205183461,0.335643772,0.571530758,0.259971649,,Only dynamic variance added
+justDynamicBoundaries,0.101292558,0.433975241,0.451359084,0.269918373,,only dynamic boundaries added
+justGauss,0.121584833,0.209874702,0.503218884,0.116035439,,only gaussian noise added
+justSmartNoise,0.661493957,0.528923077,0.614806867,0.533125801,,only smart noise added
+lAll,0.592736483,0.726759628,0.782904149,0.749176186,,"All artifacts, lowered artifact intensity"
+longRun,0.414692879,0.541707556,0.592274678,0.427433462,,Failed training
+model1000,0.498590797,0.107927534,0.300429185,0.055409787,,Test run
+NoRanNumFull,0.363633752,0.599180608,0.627682403,0.590118633,,"All artifacts, Number of defects not randomized"
+ranNumFull,0.526010871,0.680269695,0.685622318,0.66279516,,"All artifacts, ran for standard time"
+run1,0.485001087,0.054038316,0.331902718,0.028118113,,test run
+SNDynamic,0.65858227,0.724777184,0.727110157,0.72523594,,Smart Noise with dynamic variance
+SNDynamicBounds,0.558829069,0.756088561,0.732832618,0.737965958,,Smart Noise with dynamic boundaries
+SNGauss,0.67140609,0.694588073,0.720672389,0.693497766,,Smart Noise with Gaussian noise

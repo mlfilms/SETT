@@ -1,0 +1,20 @@
+name,threshold,precision,recall,,,,Description,,,,Artifacts Added,Peak F1 Score,mAP,,Key:,,
+defectT,0.405471832,0.739814153,0.740343348,,,,"All artifacts, ran for a long time",,,,"LG, L-FN, L-RV, L-RB, L-GB, L-DC, RD, LR",0.811396609,0.817776354,,FN: Fourier Noise,GB: Random Gaussian Blurring,LT: Longer Training Time
+hDecross,0.617573857,0.670140281,0.597997139,,,,Increased decross range,,,,"LG, L-FN, L-RV, L-RB, L-GB, L-DC, RD",0.816807314,0.808022464,,RV: Random Variance,DC: Randomized Decross Angle,L-XX: lowered randomization of XX
+HDynamic,0.484939039,0.61349454,0.562589413,,,,Increased dynamic variance,,,,"LG, FN, RV, RB, GB, DC, RD",0.806234502,0.78285399,,RB: Random Boundaries,RD: Randomized Defect Number,H-XX: Higher randomization of XX
+HDynamicBounds,0.53194797,0.658034764,0.663447783,,,,increased dynamic boundaries from grid and islands,,,,"L-FN, L-RV, L-RB, L-GB, L-DC, RD",0.754,0.749,,LR: Long Simulation Run,LG: Used LandauGin Simulation,
+hGauss,0.438298285,0.651014275,0.61981402,,,,Increased Gaussian blurring range,,,,"FN, RB",0.744,0.738,,,,
+hSN,0.482837677,0.616456536,0.664520744,,,,Increased smartNoise range,,,,"FN, RV",0.726,0.725,,,,
+justDynamic,0.205183372,0.335643772,0.571530758,,,,Only dynamic variance added,,,,"FN, RV, RB, GB, DC, LT",0.74,0.7,,,,
+justDynamicBoundaries,0.101292714,0.433975241,0.451359084,,,,only dynamic boundaries added,,,,"FN, GB",0.707,0.693,,,,
+justGauss,0.121584706,0.209874702,0.503218884,,,,only gaussian noise added,,,,"FN, RV, RB, GB, DC, RD",0.683,0.663,,,,
+justSmartNoise,0.661494195,0.528923077,0.614806867,,,,only smart noise added,,,,"FN, RV, H-RB, GB, DC, RD",0.661,0.643,,,,
+lAll,0.592736304,0.726759628,0.782904149,,,,"All artifacts, lowered artifact intensity",,,,"FN, RV, RB, H-GB, DC, RD",0.635,0.626,,,,
+longRun,0.41469264,0.541707556,0.592274678,,,,Failed training,,,,"FN, RV, RB, GB, H-DC, RD",0.632,0.62,,,,
+model1000,0.498590797,0.107927534,0.300429185,,,,Test run,,,,"H-FN, RV, RB, GB, DC, RD",0.64,0.617,,,,
+NoRanNumFull,0.363633901,0.599180608,0.627682403,,,,"All artifacts, Number of defects not randomized",,,,"FN, RV, RB, GB, DC",0.613,0.59,,,,
+ranNumFull,0.526010871,0.680269695,0.685622318,,,,"All artifacts, ran for standard time",,,,"FN, H-RV, RB, GB, DC, RD",0.587,0.579,,,,
+run1,0.485001177,0.054038316,0.331902718,,,,test run,,,,FN,0.569,0.533,,,,
+SNDynamic,0.65858227,0.724777184,0.727110157,,,,Smart Noise with dynamic variance,,,,RB,0.442,0.27,,,,
+SNDynamicBounds,0.55882901,0.756088561,0.732832618,,,,Smart Noise with dynamic boundaries,,,,RV,0.423,0.26,,,,
+SNGauss,0.671406031,0.694588073,0.720672389,,,,Smart Noise with Gaussian noise,,,,GB,0.296,0.116,,,,
