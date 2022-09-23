@@ -29,7 +29,7 @@ Pillow==6.0.0
 PIMS==0.4.1
 pprint==0.1
 proglog==0.1.9
-protobuf==3.7.1
+protobuf==3.18.3
 pyparsing==2.4.0
 pyreadline==2.1
 python-dateutil==2.8.0
